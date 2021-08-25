@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_alignParentBottom="true"
-    android:layout_height="48dp">
+    android:layout_height="48dp"
+    android:layout_alignParentBottom="true">
 
     <LinearLayout
         android:id="@+id/ll_bottom"
@@ -12,18 +12,19 @@
 
         <TextView
             android:id="@+id/HotTv"
+            style="@style/bottom_tv"
             android:text="HOT"
-            style="@style/bottom_tv" />
+            android:textColor="@color/red" />
 
         <TextView
             android:id="@+id/CatTv"
-            android:text="TYPES"
-            style="@style/bottom_tv" />
+            style="@style/bottom_tv"
+            android:text="TYPES" />
 
         <TextView
             android:id="@+id/SetTv"
-            android:text="SETTING"
-            style="@style/bottom_tv" />
+            style="@style/bottom_tv"
+            android:text="SETTING" />
 
     </LinearLayout>
 </LinearLayout>

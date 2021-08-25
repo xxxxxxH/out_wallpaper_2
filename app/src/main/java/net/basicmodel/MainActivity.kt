@@ -2,6 +2,7 @@ package net.basicmodel
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import kotlinx.android.synthetic.main.layout_bottom.*
 import net.fragment.HotFragment
 import net.fragment.SettingFragment
 import net.fragment.TypeFragment
@@ -29,7 +31,43 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         requestPermissions()
+        initView()
         showPosition(0)
+    }
+
+    fun initView() {
+        HotTv.setOnClickListener {
+            showPosition(0)
+            setColor(0)
+        }
+        CatTv.setOnClickListener {
+            showPosition(1)
+            setColor(1)
+        }
+        SetTv.setOnClickListener {
+            showPosition(2)
+            setColor(2)
+        }
+    }
+
+    fun setColor(position: Int){
+        when(position){
+            0->{
+                HotTv.setTextColor(Color.RED)
+                CatTv.setTextColor(Color.BLACK)
+                SetTv.setTextColor(Color.BLACK)
+            }
+            1->{
+                HotTv.setTextColor(Color.BLACK)
+                CatTv.setTextColor(Color.RED)
+                SetTv.setTextColor(Color.BLACK)
+            }
+            2->{
+                HotTv.setTextColor(Color.BLACK)
+                CatTv.setTextColor(Color.BLACK)
+                SetTv.setTextColor(Color.RED)
+            }
+        }
     }
 
     private fun requestPermissions() {
@@ -108,16 +146,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showDlg(){
-        if (loadingDialog == null){
-            loadingDialog = LoadingDialog(this)
-        }
-        loadingDialog!!.show()
-    }
-
-    fun closeDlg(){
-        if (loadingDialog != null && loadingDialog!!.isShowing){
-            loadingDialog!!.dismiss()
-        }
-    }
 }

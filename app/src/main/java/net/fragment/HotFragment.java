@@ -1,6 +1,8 @@
 package net.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +12,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.basicmodel.ImgAdapter;
+import net.adapter.ImgAdapter;
+import net.basicmodel.GalleryActivity;
 import net.basicmodel.MainActivity;
 import net.basicmodel.R;
 import net.entity.DataEntity;
 import net.http.RequestService;
 import net.http.RetrofitUtils;
 import net.utils.Constanst;
+import net.utils.DialogManager;
 import net.utils.OnItemClickListener;
 import net.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.List;
 
 import retrofit2.Call;
@@ -44,7 +49,7 @@ public class HotFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((MainActivity) getActivity()).showDlg();
+        DialogManager.getInstance().showLoadingDlg(getActivity());
         initData(view);
     }
 
@@ -62,19 +67,24 @@ public class HotFragment extends Fragment implements OnItemClickListener {
             public void onResponse(Call<List<DataEntity>> call, Response<List<DataEntity>> response) {
                 Log.i("xxxxxxH", "response = " + response);
                 initView(response.body(),view);
-                ((MainActivity) getActivity()).closeDlg();
+                DialogManager.getInstance().closeLoadingDlg();
             }
 
             @Override
             public void onFailure(Call<List<DataEntity>> call, Throwable t) {
                 new ToastUtils(getActivity(), "no data").showToast();
-                ((MainActivity) getActivity()).closeDlg();
+                DialogManager.getInstance().closeLoadingDlg();
             }
         });
     }
 
     @Override
     public void onItemClick(int position, @NotNull String flag) {
-
+        if (TextUtils.equals(flag,Constanst.TYPE_HOT)){
+            Intent intent = new Intent(getActivity(), GalleryActivity.class);
+            intent.putExtra("position",position);
+            intent.putExtra("data", (Serializable) adapter.getData());
+            getActivity().startActivity(intent);
+        }
     }
 }

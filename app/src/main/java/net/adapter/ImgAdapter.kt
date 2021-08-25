@@ -1,4 +1,4 @@
-package net.basicmodel
+package net.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.layout_hot_item.view.*
+import net.basicmodel.R
 import net.entity.DataEntity
 import net.utils.Constanst
 import net.utils.OnItemClickListener
@@ -52,6 +53,7 @@ class ImgAdapter(
                     }
                 }
             }
+
         }
     }
 
