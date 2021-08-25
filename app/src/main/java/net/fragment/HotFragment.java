@@ -55,7 +55,7 @@ public class HotFragment extends Fragment implements OnItemClickListener {
 
     private void initView(List<DataEntity> dataEntities, View view) {
         recyclerView = view.findViewById(R.id.recyclerviewHot);
-        adapter = new ImgAdapter(dataEntities, getActivity(), getActivity(), this, Constanst.TYPE_HOT);
+        adapter = new ImgAdapter(dataEntities,null, getActivity(), getActivity(), this, Constanst.TYPE_HOT);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
     }
@@ -79,7 +79,7 @@ public class HotFragment extends Fragment implements OnItemClickListener {
     }
 
     @Override
-    public void onItemClick(int position, @NotNull String flag) {
+    public void onItemClick(int position, @NotNull String flag,String sought) {
         if (TextUtils.equals(flag,Constanst.TYPE_HOT)){
             Intent intent = new Intent(getActivity(), GalleryActivity.class);
             intent.putExtra("position",position);

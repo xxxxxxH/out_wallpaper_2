@@ -51,7 +51,7 @@ public class ImgUtils {
                 .listener(new RequestListener<File>() {
                     @Override
                     public boolean onLoadFailed(GlideException e, Object model, Target<File> target, boolean isFirstResource) {
-                        Toast.makeText(context, "download failed", Toast.LENGTH_SHORT).show();
+                        new ToastUtils(context,"download failed").showToast();
                         DialogManager.getInstance().closeLoadingDlg();
                         return false;
                     }
@@ -82,10 +82,9 @@ public class ImgUtils {
                 wallpaperManager.setBitmap(bitmap);
                 bitmap.recycle();
             }
-
-            Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+            new ToastUtils(context,"success").showToast();
         }else {
-            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+            new ToastUtils(context,"failed").showToast();
         }
 
         DialogManager.getInstance().closeLoadingDlg();
